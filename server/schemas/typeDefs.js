@@ -22,14 +22,15 @@ const typeDefs = `
   }
 
   type Query {
-    tech: [User]
-    matchups(_id: String): [User]
+    getSingleUser(userId: ID, username: String): User
+    
   }
 
   type Mutation {
     createUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    createVote(_id: String!, techNum: Int!): User
+    saveBook(userId: ID!, book: Book!): User
+    deleteBook(userId: ID!, bookId: ID!): User
   }
 `;
 
