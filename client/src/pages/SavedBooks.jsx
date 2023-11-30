@@ -14,12 +14,12 @@ const SavedBooks = () => {
 
   // use this to determine if `useEffect()` hook needs to run again
   const userDataLength = Object.keys(userData).length;
-
+// might remove this afterwards
   useEffect(() => {
-    // If you need to perform additional actions when userData changes, do it here.
+    
   }, [userDataLength]);
 
-  // create function that accepts the book's mongo _id value as param and deletes the book from the database
+  
   const handleDeleteBook = async (bookId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -32,12 +32,9 @@ const SavedBooks = () => {
         variables: { bookId },
       });
 
-      // upon success, refetch the user data to get the updated savedBooks
-      // Note: In a larger app, consider using a cache update instead of refetching
-      // (see Apollo Client documentation for more details)
-      // Here, we refetch the entire 'me' query to update the savedBooks
+    
       await refetch();
-      // upon success, remove book's id from localStorage
+    
       removeBookId(bookId);
     } catch (err) {
       console.error(err);

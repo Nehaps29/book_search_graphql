@@ -3,6 +3,7 @@ const typeDefs = `
     _id: ID!
     username: String!
     email: String!
+    bookCount: Int
     savedBooks: [Book]
   }
 
@@ -27,7 +28,7 @@ const typeDefs = `
   }
 
   type Query {
-    getSingleUser(userId: ID, username: String): User
+    getSingleUser(userId: ID, username: String): User 
     me: User
     searchGoogleBooks(query: String!): [Book]
   }
@@ -36,7 +37,7 @@ const typeDefs = `
     createUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     saveBook(userId: ID!, book: BookInput!): User
-    deleteBook(userId: ID!, bookId: String!): User
+    deleteBook(userId: ID!, bookId: String!): User 
   }
 `;
 
