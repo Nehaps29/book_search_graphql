@@ -11,6 +11,19 @@ export const QUERY_GETSINGLEUSER = gql`
   }
 `;
 
+export const SEARCH_GOOGLE_BOOKS = gql`
+  query SearchGoogleBooks($query: String!) {
+    searchGoogleBooks(query: $query) {
+      bookId: id
+      authors
+      title
+      description
+      imageLinks {
+        thumbnail
+      }
+    }
+  }
+`;
 
 
 export const QUERY_ME = gql`

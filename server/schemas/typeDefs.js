@@ -24,6 +24,7 @@ const typeDefs = `
   type Query {
     getSingleUser(userId: ID, username: String): User
     me: User
+    searchGoogleBooks(query: String!): [Book]
   }
 
   type Mutation {
