@@ -3,17 +3,7 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    getSingleUser: async (parent, { userId, username }) => {
-      const foundUser = await User.findOne({
-        $or: [{ _id: userId }, { username }],
-      });
-
-      if (!foundUser) {
-        throw AuthenticationError;
-      }
-
-      return foundUser;
-    },
+   
 
      // By adding context to our query, we can retrieve the logged in user without specifically searching for them
      me: async (parent, args, context) => {
@@ -22,29 +12,33 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
+    /*
+    
+    
+    */
 
     
-      searchGoogleBooks: async (_, { query }) => {
-        try {
-          const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
-          const data = await response.json();
+      // searchGoogleBooks: async (_, { query }) => {
+      //   try {
+      //     const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
+      //     const data = await response.json();
   
-          if (data.items) {
-            return data.items.map((item) => ({
-              bookId: item.id,
-              authors: item.volumeInfo.authors || [],
-              title: item.volumeInfo.title || '',
-              description: item.volumeInfo.description || '',
-              imageLinks: item.volumeInfo.imageLinks || {},
-            }));
-          }
+      //     if (data.items) {
+      //       return data.items.map((item) => ({
+      //         bookId: item.id,
+      //         authors: item.volumeInfo.authors || [],
+      //         title: item.volumeInfo.title || '',
+      //         description: item.volumeInfo.description || '',
+      //         imageLinks: item.volumeInfo.imageLinks || {},
+      //       }));
+      //     }
   
-          return [];
-        } catch (error) {
-          console.error(error);
-          return [];
-        }
-      },
+      //     return [];
+      //   } catch (error) {
+      //     console.error(error);
+      //     return [];
+      //   }
+      // },
     
   },
 

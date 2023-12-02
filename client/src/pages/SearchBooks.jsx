@@ -8,7 +8,8 @@ import {
   Card,
   Row
 } from 'react-bootstrap';
-import { SEARCH_GOOGLE_BOOKS } from '../utils/queries';
+//import { SEARCH_GOOGLE_BOOKS } from '../utils/queries';
+import {  searchGoogleBooks } from '../utils/API';
 import { SAVE_BOOK } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { getSavedBookIds, saveBookIds } from '../utils/localStorage';
@@ -18,24 +19,12 @@ const SearchBooks = () => {
   const [searchInput, setSearchInput] = useState('');
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
 
-  const { loading: searchLoading, data: searchData } = useQuery(SEARCH_GOOGLE_BOOKS, {
-    variables: { searchInput }
-  });
-
   const [saveBook] = useMutation(SAVE_BOOK);
 
   // useEffect to update savedBookIds
   useEffect(() => {
-    if (searchData) {
-      setSearchedBooks(searchData.searchGoogleBooks.map(book => ({
-        bookId: book.bookId,
-        authors: book.authors || ['No author to display'],
-        title: book.title,
-        description: book.description,
-        image: book.imageLinks?.thumbnail || '',
-      })));
-    }
-  }, [searchData]);
+    return () => saveBookIds(savedBookIds);
+  });
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -71,9 +60,9 @@ const SearchBooks = () => {
     }
   };
 
-  if (searchLoading) {
-    return <h2>LOADING...</h2>;
-  }
+  // if (searchLoading) {
+  //   return <h2>LOADING...</h2>;
+  // }
 
   return (
     <>

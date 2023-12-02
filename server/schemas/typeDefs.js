@@ -1,6 +1,6 @@
 const typeDefs = `
   type User {
-    _id: ID!
+    _id: ID! 
     username: String!
     email: String!
     bookCount: Int
@@ -8,10 +8,9 @@ const typeDefs = `
   }
 
   type Book {
-    _id: ID!
+    bookId: ID!
     authors: [String]
     description: String!
-    bookId: String!
     image: String
     link: String
     title: String!
@@ -28,9 +27,9 @@ const typeDefs = `
   }
 
   type Query {
-    getSingleUser(userId: ID, username: String): User 
+    
     me: User
-    searchGoogleBooks(query: String!): [Book]
+    
   }
 
   type Mutation {

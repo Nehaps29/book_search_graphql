@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { Container, Card, Button, Row, Col } from 'react-bootstrap';
 import { QUERY_ME } from '../utils/queries';
-import { DELETE_BOOK, SAVEBOOK } from '../utils/mutations';
+import { DELETE_BOOK, SAVE_BOOK } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 
