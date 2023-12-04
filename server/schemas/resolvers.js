@@ -44,20 +44,18 @@ const resolvers = {
       return { token, user };
     },
 
-    saveBook: async (parent, { userId, book }) => {
-      const updatedUser = await User.findOneAndUpdate(
-        { _id: userId },
-        { $addToSet: { savedBooks: book } },
+    saveBook: async (parent, args, context) => {
+      if (context.user){
+        const updatedUser = await User.findOneAndUpdate(
+        { _id: context.user._id },
+        { $addToSet: { savedBooks: args.input } },
         { new: true, runValidators: true }
       );
-
-      if (!updatedUser) {
-        throw AuthenticationError;
-      }
-
-      return updatedUser;
+      return updatedUser; 
+    }
+    throw AuthenticationError;
     },
-
+    
     deleteBook: async (parent, { userId, bookId }) => {
       const updatedUser = await User.findOneAndUpdate(
         { _id: userId },
