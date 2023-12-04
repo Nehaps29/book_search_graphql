@@ -15,14 +15,14 @@ const authLink = setContext((_, {headers})=>{
 
   return {
     headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : ""
-    }
-  }
-})
+      ...headers, 
+      authorization: token ? `Bearer ${token}` : " ",
+    },
+  };
+});
 console.log(authLink.concat(httpLink))
 const client = new ApolloClient({
-  uri: authLink.concat(httpLink),
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 

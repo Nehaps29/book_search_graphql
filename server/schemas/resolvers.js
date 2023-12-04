@@ -12,34 +12,7 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
-    /*
-    
-    
-    */
-
-    
-      // searchGoogleBooks: async (_, { query }) => {
-      //   try {
-      //     const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
-      //     const data = await response.json();
-  
-      //     if (data.items) {
-      //       return data.items.map((item) => ({
-      //         bookId: item.id,
-      //         authors: item.volumeInfo.authors || [],
-      //         title: item.volumeInfo.title || '',
-      //         description: item.volumeInfo.description || '',
-      //         imageLinks: item.volumeInfo.imageLinks || {},
-      //       }));
-      //     }
-  
-      //     return [];
-      //   } catch (error) {
-      //     console.error(error);
-      //     return [];
-      //   }
-      // },
-    
+   
   },
 
   Mutation: {
@@ -54,8 +27,8 @@ const resolvers = {
       return { token, user };
     },
 
-    login: async (parent, { username, email, password }) => {
-      const user = await User.findOne({ $or: [{ username }, { email }] });
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne( { email });
 
       if (!user) {
         throw AuthenticationError;
